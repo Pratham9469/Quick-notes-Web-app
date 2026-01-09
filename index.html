@@ -236,14 +236,14 @@
     <h2>Quick Notes</h2>
     <div class="button_nav">
       <button class="note">+ Add Note</button>
-      <button class="light" class="light-mode"><img src="/images/light_mode.svg"></button>
+      <button class="light" class="light-mode"><img src="images/light_mode.svg"></button>
     </div>
   </nav>
 
     <dialog>
     <div class="dialog_div">
       <h3>Add New Note</h3>
-      <img src="/images/cross.svg" class="cross">
+      <img src="images/cross.svg" class="cross">
     </div>
 
     <div class="div_sec">
@@ -296,10 +296,10 @@
     document.body.classList.toggle("light-mode");
 
     if(document.body.classList.contains("dark-mode")){
-      mode_change.src = "/images/dark_mode.svg"
+      mode_change.src = "images/dark_mode.svg"
     }
     else{
-      mode_change.src = "/images/light_mode.svg"
+      mode_change.src = "images/light_mode.svg"
     }
   });
   
@@ -321,8 +321,8 @@
       // when note is created
       noteDiv.innerHTML = `<div class="edit_del">
         <h2>${note.title}</h2>
-        <img src="/images/edit.svg" class=edit_img>
-        <img src="/images/delete.svg" class=del_img>
+        <img src="images/edit.svg" class=edit_img>
+        <img src="images/delete.svg" class=del_img>
         </div>
       <p>${note.content}</p>`;
 
