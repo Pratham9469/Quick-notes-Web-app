@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body{
+      padding: 0;
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      box-sizing: 0;
+    }
+    body.light-mode {
+        background-color: white;
+        color: black;
+    }
+
+    body.light-mode .notes_pages {
+        background-color: #f9f9f9;
+        color: black;
+    }
+
+    body.dark-mode {
+        background-color: #121212;
+        color: rgb(200, 200, 200);
+    }
+
+    body.dark-mode .notes_pages {
+        background-color: #1e1e1e;
+        color: rgb(200, 200, 200);;
+    }
+
+    .navbar{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      margin-right: 22px;
+    }
+    .button_nav{
+      width: 200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .note{
+      border: none;
+      width: 110px;
+      height: 40px;
+      border-radius: 10px;
+      background-color: rgb(131, 131, 255);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .note:hover{
+      background-color: rgb(159, 159, 255);
+    }
+  .light{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .dialog_div{
+      display: flex;
+      align-items: center;
+      width: 21rem;
+      height: auto;
+      gap: 50%;
+      padding-bottom: 5px;
+    }
+    div img{
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .div_sec p{
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .div_sec input{
+      width: 90%;
+      background-color: rgb(243, 243, 243);
+      padding: 8px 10px;
+      border-radius: 6px;
+      letter-spacing: 1px;
+    }
+    input{
+      border: 2px solid rgb(141, 141, 255);
+      outline: none;
+      padding-bottom: 10px;
+    }
+    input::placeholder{
+      width: 100%;
+      letter-spacing: 2px;
+      color: rgb(121, 121, 121);
+      font-weight: bold;
+    }
+    input:focus{
+     border: 2px solid rgb(141, 141, 255);
+     outline: none;
+    }
+    dialog{
+      border: none;
+      border-radius: 10px;
+    }
+    dialog:focus{
+      outline: none;
+    }
+    dialog::backdrop{
+      backdrop-filter: blur(5px);
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    textarea{
+      width: 93%;
+      border: 2px solid rgb(141, 141, 255);
+      outline: none;
+      padding-bottom: 10px;
+      background-color: rgb(243, 243, 243);
+      padding-left: 10px;
+      border-radius: 6px;
+      margin-bottom: 26px;
+    }
+    textarea::placeholder{
+      letter-spacing: 2px;
+      color: rgb(121, 121, 121);
+      font-weight: bold;
+    }
+    textarea:focus{
+      border: 2px solid rgb(141, 141, 255);
+      outline: none;
+    }
+    .div_third{
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+    .div_third :nth-child(1){
+      width: 80px;
+      height: 35px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+    .div_third :nth-child(1):hover{
+      background-color: rgb(212, 212, 212);
+    }
+
+    .div_third :nth-child(2){
+      width: 100px;
+      height: auto;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+      background-color: rgb(131, 131, 255);
+      color: white;
+    }
+    .div_third :nth-child(2):hover{
+      background-color: rgb(159, 159, 255);
+    }
+    #noteContainer{
+      padding: 25px 20px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .notes_pages{
+      width: min(320px, 90%);
+      height: min(320px, 90%);;
+      background-color: rgb(243, 243, 243);
+      padding-left: 10px;
+      padding-top: 4px;
+      padding-bottom: 20px;
+      padding-right: 20px;
+      border-radius: 5px;
+      word-spacing: 1px;
+      line-height: 24px;
+      box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+    }
+    .notes_pages p{
+      color: rgb(91, 91, 91);
+      margin-top: 0px;
+    }
+    .notes_pages h2{
+      margin-bottom: 10px;
+    }
+    .no_notes{
+      width: 200px;
+      height: 100px;
+      padding-left: 30px;
+      text-align: center;
+    }
+    .no_notes h3{
+      color: rgb(164, 164, 164);
+      font-weight: bold;
+    }
+    .no_notes p{
+      color: rgb(93, 93, 93);
+    }
+    #noteContainer .edit_del{
+      display: flex;
+      align-items: center;
+    }
+    .edit_img{
+    margin-left: auto;
+    margin-right: 10px;
+    background-color: rgb(232, 232, 232);
+    padding: 5px 5px;
+    border-radius: 5px;
+    }
+    .del_img{
+    background-color: rgb(232, 232, 232);
+    padding: 5px 5px;
+    border-radius: 5px;
+    }
+  </style>
+</head>
+<body class="light-mode">
+  <nav class="navbar">
+    <h2>Quick Notes</h2>
+    <div class="button_nav">
+      <button class="note">+ Add Note</button>
+      <button class="light" class="light-mode"><img src="/images/light_mode.svg"></button>
+    </div>
+  </nav>
+
+    <dialog>
+    <div class="dialog_div">
+      <h3>Add New Note</h3>
+      <img src="/images/cross.svg" class="cross">
+    </div>
+
+    <div class="div_sec">
+      <p>Title</p>
+      <input placeholder="Enter note title..." class="title_obj">
+      <p>Content</p>
+      <textarea rows="5" cols="30" placeholder="Write your note here..." class="content_obj"></textarea>
+    </div>
+
+    <div class="div_third">
+      <button>Cancel</button>
+      <button class="saveNote">Save Note</button>
+    </div>
+  </dialog>
+  
+  <div id="noteContainer"></div>
+  <div class="no_notes">
+    <h3>No Notes Yet❌</h3>
+    <p>Create your first note to get started!✅</p>
+  </div>
+</body>
+<script>
+  const show_dialog = document.querySelector("dialog");
+  const AddNote = document.querySelector(".note");
+  const cross_dialog = document.querySelector(".cross");
+  const cancel_note = document.querySelector(".div_third :nth-child(1)");
+  const mode_change = document.querySelector(".light img");
+  const noteContainer = document.getElementById("noteContainer");
+  const titleObj = document.querySelector(".title_obj");
+  const ContentObj = document.querySelector(".content_obj");
+  const saveNote = document.querySelector(".saveNote");
+  const noNotes = document.querySelector(".no_notes");
+  const changeTag = document.querySelector("dialog h3");
+  let editId = null;
+  let notes = [];
+
+
+  const savedNotes = localStorage.getItem("notes");
+
+  if (savedNotes) {
+    notes = JSON.parse(savedNotes);
+    renderNote();
+  }
+
+
+
+  // change light to dark mode
+  mode_change.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    document.body.classList.toggle("light-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+      mode_change.src = "/images/dark_mode.svg"
+    }
+    else{
+      mode_change.src = "/images/light_mode.svg"
+    }
+  });
+  
+  // show if there is no note
+  function renderNote() {
+    noteContainer.innerHTML = "";
+
+    if (notes.length === 0) {
+    noNotes.style.display = "block"; // Show the message
+    noNotes.innerHTML = `<h3>No Notes Yet❌</h3><p>Create your first note to get started!✅</p>`;
+  } else {
+    noNotes.style.display = "none"; // Hide the message
+  }
+
+    notes.forEach(note => {
+      const noteDiv = document.createElement("div");
+      noteDiv.classList.add("notes_pages");
+
+      // when note is created
+      noteDiv.innerHTML = `<div class="edit_del">
+        <h2>${note.title}</h2>
+        <img src="/images/edit.svg" class=edit_img>
+        <img src="/images/delete.svg" class=del_img>
+        </div>
+      <p>${note.content}</p>`;
+
+      noteContainer.appendChild(noteDiv);
+
+      // Delete the specific note
+       const deleteArr = noteDiv.querySelector(".del_img");
+
+        deleteArr.addEventListener("click", () => {
+          deleteNote(note.id);
+    });
+
+    // Edit the specific note
+    const editNote = noteDiv.querySelector(".edit_img");
+
+       editNote.addEventListener("click", () => {
+          editId = note.id;
+          changeTag.innerText = "Update Note";
+          saveNote.innerText = "Update";
+          show_dialog.showModal();
+        });
+    });
+  }
+
+    function saveToLocalStorage() {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }
+
+
+
+  // Add note and save note
+  AddNote.addEventListener("click", () => {
+      editId = null;                    
+      changeTag.innerText = "Add New Note"; 
+      saveNote.innerText = "Save Note";
+      titleObj.value = "";              
+      ContentObj.value = "";
+      show_dialog.showModal(); 
+  });
+
+  
+    // Delete note function
+    function deleteNote(id){
+      notes = notes.filter((note) => note.id !== id);
+      saveToLocalStorage();
+      renderNote();
+    }
+
+    // Edit note function
+    function editnote(id){
+      notes.forEach(note => {
+        if(note.id == id){
+        note.title = titleObj.value;
+        note.content = ContentObj.value;
+      }
+      });
+        saveToLocalStorage();
+        renderNote();
+        titleObj.value = "";
+        ContentObj.value = "";
+        show_dialog.close();
+    }
+
+    // Save note logic
+    saveNote.addEventListener("click", () => {
+        const title = titleObj.value;
+        const content = ContentObj.value;
+        if(editId != null){
+          editnote(editId);
+          editId = null;
+        }
+        else{
+        notes.push({
+        id: Date.now(),
+        title: title,
+        content: content,
+      });
+      saveToLocalStorage();
+    }
+        renderNote();
+        titleObj.value = "";
+        ContentObj.value = "";
+        noNotes.innerText = "";
+        show_dialog.close();
+      });
+
+  cross_dialog.addEventListener("click", () => {
+    show_dialog.close();
+  });
+
+  cancel_note.addEventListener("click", () => {
+    show_dialog.close();
+  });
+
+</script>
+</html>
